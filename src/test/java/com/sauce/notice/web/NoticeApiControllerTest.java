@@ -47,8 +47,6 @@ public class NoticeApiControllerTest {
     public void savedNotice() throws Exception {
         //given
         Member member = Member.builder()
-            .loginId("tester")
-            .loginPass("1234")
             .name("tester")
             .email("sauce0127@gmail.com")
             .build();
@@ -79,8 +77,6 @@ public class NoticeApiControllerTest {
     public void updateNotice() throws Exception {
         //given
         Member member = Member.builder()
-            .loginId("tester")
-            .loginPass("1234")
             .name("tester")
             .email("sauce0127@gmail.com")
             .build();

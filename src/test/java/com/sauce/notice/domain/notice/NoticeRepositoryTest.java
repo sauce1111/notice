@@ -43,8 +43,6 @@ public class NoticeRepositoryTest extends TestCase {
 
         //then
         Notice notice = noticeList.get(0);
-        assertThat(notice.getMember().getLoginId()).isEqualTo("tester");
-        assertThat(notice.getMember().getLoginPass()).isEqualTo("1234");
         assertThat(notice.getMember().getName()).isEqualTo("tester");
         assertThat(notice.getMember().getEmail()).isEqualTo("sauce0127@gmail.com");
         assertThat(notice.getTitle()).isEqualTo("test title");
@@ -71,8 +69,6 @@ public class NoticeRepositoryTest extends TestCase {
 
     private void defaultNoticeBuild() {
         Member member = Member.builder()
-            .loginId("tester")
-            .loginPass("1234")
             .name("tester")
             .email("sauce0127@gmail.com")
             .build();

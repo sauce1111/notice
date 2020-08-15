@@ -3,6 +3,8 @@ package com.sauce.notice.domain.member;
 import com.sauce.notice.domain.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,22 +24,28 @@ public class Member extends BaseTimeEntity {
     private Long memberIdx;
 
     @Column(length = 20, nullable = false)
-    private String loginId;
-
-    @Column(length = 20, nullable = false)
-    private String loginPass;
-
-    @Column(length = 20, nullable = false)
     private String name;
 
     @Column(length = 20, nullable = true)
     private String email;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
     @Builder
-    public Member(String loginId, String loginPass, String name, String email) {
-        this.loginId = loginId;
-        this.loginPass = loginPass;
+    public Member(String loginId, String loginPass, String name, String email, Role role) {
         this.name = name;
         this.email = email;
+        this.role = role;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
+
+    public Member update(String name) {
+        this.name = name;
+        return this;
     }
 }
