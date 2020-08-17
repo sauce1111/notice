@@ -8,13 +8,13 @@ import lombok.Getter;
 public class NoticeResponceDto {
 
     private Long noticeIdx;
-    private Member member;
+    private String memberName;
     private String title;
     private String content;
 
     public NoticeResponceDto(Notice entity) {
         this.noticeIdx = entity.getNoticeIdx();
-        this.member = entity.getMember();
+        this.memberName = entity.getMemberName();
         this.title = entity.getTitle();
         this.content = entity.getContent();
     }

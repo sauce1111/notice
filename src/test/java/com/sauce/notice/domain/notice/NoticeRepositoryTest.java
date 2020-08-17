@@ -1,7 +1,5 @@
 package com.sauce.notice.domain.notice;
 
-import com.sauce.notice.domain.member.Member;
-import com.sauce.notice.domain.member.MemberRepository;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
@@ -24,13 +22,11 @@ public class NoticeRepositoryTest extends TestCase {
     @Autowired
     NoticeRepository noticeRepository;
     @Autowired
-    MemberRepository memberRepository;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @After
     public void cleanup() {
         noticeRepository.deleteAll();
-        memberRepository.deleteAll();
     }
 
     @Test
@@ -43,8 +39,6 @@ public class NoticeRepositoryTest extends TestCase {
 
         //then
         Notice notice = noticeList.get(0);
-        assertThat(notice.getMember().getName()).isEqualTo("tester");
-        assertThat(notice.getMember().getEmail()).isEqualTo("sauce0127@gmail.com");
         assertThat(notice.getTitle()).isEqualTo("test title");
         assertThat(notice.getContent()).isEqualTo("test content");
     }
@@ -68,14 +62,11 @@ public class NoticeRepositoryTest extends TestCase {
     }
 
     private void defaultNoticeBuild() {
-        Member member = Member.builder()
-            .name("tester")
-            .email("sauce0127@gmail.com")
-            .build();
         String title = "test title";
         String content = "test content";
+        String memberName = "tester";
         noticeRepository.save(Notice.builder()
-            .member(member)
+            .memberName(memberName)
             .title(title)
             .content(content)
             .build());

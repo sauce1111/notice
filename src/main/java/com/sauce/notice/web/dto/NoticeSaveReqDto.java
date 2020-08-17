@@ -10,20 +10,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class NoticeSaveReqDto {
 
-    private Member member;
+    private String memberName;
     private String title;
     private String content;
 
     @Builder
-    public NoticeSaveReqDto(Member member, String title, String content) {
-        this.member = member;
+    public NoticeSaveReqDto(String memberName, String title, String content) {
+        this.memberName = memberName;
         this.title = title;
         this.content = content;
     }
 
     public Notice toEntity() {
         return Notice.builder()
-            .member(member)
+            .memberName(memberName)
             .title(title)
             .content(content)
             .build();

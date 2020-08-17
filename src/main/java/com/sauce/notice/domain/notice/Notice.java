@@ -25,8 +25,8 @@ public class Notice extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long noticeIdx;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Member member;
+    @Column(nullable = false)
+    private String memberName;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String title;
@@ -35,8 +35,8 @@ public class Notice extends BaseTimeEntity {
     private String content;
 
     @Builder
-    public Notice(Member member, String title, String content) {
-        this.member = member;
+    public Notice(String memberName, String title, String content) {
+        this.memberName = memberName;
         this.title = title;
         this.content = content;
     }

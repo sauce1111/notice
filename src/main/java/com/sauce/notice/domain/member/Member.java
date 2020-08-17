@@ -26,7 +26,7 @@ public class Member extends BaseTimeEntity {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @Column(length = 20, nullable = true)
+    @Column(length = 20, nullable = false)
     private String email;
 
     @Enumerated(EnumType.STRING)
@@ -34,7 +34,7 @@ public class Member extends BaseTimeEntity {
     private Role role;
 
     @Builder
-    public Member(String loginId, String loginPass, String name, String email, Role role) {
+    public Member(String name, String email, Role role) {
         this.name = name;
         this.email = email;
         this.role = role;
@@ -47,5 +47,9 @@ public class Member extends BaseTimeEntity {
     public Member update(String name) {
         this.name = name;
         return this;
+    }
+
+    public void updateRoleMember(Role roleMember) {
+        this.role = roleMember;
     }
 }
