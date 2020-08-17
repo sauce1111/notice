@@ -1,9 +1,44 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <title>notice home</title>
-</head>
-<body>
-login please
-</body>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
+
+<th:block layout:fragment="css"></th:block>
+
+<th:block layout:fragment="script"></th:block>
+
+<div layout:fragment="content">
+
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <a href="/notice/save" role="button" class="btn btn-primary">글 등록</a>
+        <span id="user" th:text="${memberName}"></span> 님 안녕하세요.
+        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+      </div>
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+      <thead class="thead-strong">
+      <tr>
+        <th>게시글 번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>최종수정일</th>
+      </tr>
+      </thead>
+      <tbody id="tbody">
+      <tr th:each="notice: ${notice}">
+        <td th:text="${notice.noticeIdx}"></td>
+        <td th:text="${notice.title}"><a th:href="@{/posts/search/(id=${notice.noticeIdx})"></a>
+        </td>
+        <td th:text="${notice.content}"></td>
+        <td th:text="${notice.modifiedDate}"></td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
 </html>
+
