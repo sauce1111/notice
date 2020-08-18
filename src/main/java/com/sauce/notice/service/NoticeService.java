@@ -7,8 +7,16 @@ import com.sauce.notice.web.dto.NoticeResponceDto;
 import com.sauce.notice.web.dto.NoticeSaveReqDto;
 import com.sauce.notice.web.dto.NoticeUpdateReqDto;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import javax.persistence.Converter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,5 +58,14 @@ public class NoticeService {
         return noticeRepository.findAll().stream()
             .map(NoticeListResponseDto::new)
             .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<NoticeListResponseDto> findAll(Pageable pageable) {
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, 10, new Sort(Direction.DESC, "noticeIdx"));
+        NoticeListResponseDto convertedNoticeListDto = null;
+        Page<Notice> pagedNoticeAllList = noticeRepository.findAll(pageable);
+        return convertedNoticeListDto.of(pagedNoticeAllList);
     }
 }

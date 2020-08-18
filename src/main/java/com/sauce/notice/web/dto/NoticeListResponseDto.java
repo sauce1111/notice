@@ -3,6 +3,7 @@ package com.sauce.notice.web.dto;
 import com.sauce.notice.domain.notice.Notice;
 import java.time.LocalDateTime;
 import lombok.Getter;
+import org.springframework.data.domain.Page;
 
 @Getter
 public class NoticeListResponseDto {
@@ -18,4 +19,9 @@ public class NoticeListResponseDto {
         this.content = entity.getContent();
         this.modifiedDate = entity.getModifiedDate();
     }
+
+    public static Page<NoticeListResponseDto> of(Page<Notice> pagedNoticeList) {
+        return pagedNoticeList.map(NoticeListResponseDto::new);
+    }
+
 }

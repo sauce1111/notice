@@ -30,13 +30,51 @@
       <tbody id="tbody">
       <tr th:each="notice: ${notice}">
         <td th:text="${notice.noticeIdx}"></td>
-        <td th:text="${notice.title}"><a th:href="@{/posts/search/(id=${notice.noticeIdx})"></a>
+        <td th:text="${notice.title}"><a th:href="@{/notice/search/(id=${notice.noticeIdx})"></a>
         </td>
         <td th:text="${notice.content}"></td>
         <td th:text="${notice.modifiedDate}"></td>
       </tr>
       </tbody>
     </table>
+
+    <!-- 페이징 네비게이션 영역 -->
+    <nav style="text-align: center;">
+      <ul class="pagination"
+          th:with="start=${T(Math).floor(notice.number/10)*10+1},
+                    last=(${start + 9 < notice.totalPages ? start + 9 : notice.totalPages})">
+        <li>
+          <a th:href="@{/(page=1)}" aria-label="First">
+            <span aria-hidden="true">처음으로</span>
+          </a>
+        </li>
+
+        <li th:class="${notice.first} ? 'disabled'">
+          <a th:href="${notice.first} ? '#' : @{/(page=${notice.number})}"
+             aria-label="Previous">
+            <span aria-hidden="true">&lt;</span>
+          </a>
+        </li>
+
+        <li th:each="page: ${#numbers.sequence(start, last)}"
+            th:class="${page == notice.number+1} ? 'active'">
+          <a th:text="${page}" th:href="@{/(page=${page})}"></a>
+        </li>
+
+        <li th:class="${notice.last} ? 'disabled'">
+          <a th:href="${notice.last} ? '#' : @{/(page=${notice.number+2})}"
+             aria-label="Next">
+            <span aria-hidden="true">&gt;</span>
+          </a>
+        </li>
+
+        <li>
+          <a th:href="@{/(page=${notice.totalPages})}" aria-label="Last">
+            <span aria-hidden="true">끝으로</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
   </div>
 </div>
