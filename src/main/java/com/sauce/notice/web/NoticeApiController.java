@@ -4,7 +4,6 @@ import com.sauce.notice.service.NoticeService;
 import com.sauce.notice.web.dto.NoticeResponceDto;
 import com.sauce.notice.web.dto.NoticeSaveReqDto;
 import com.sauce.notice.web.dto.NoticeUpdateReqDto;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

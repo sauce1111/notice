@@ -1,6 +1,5 @@
 package com.sauce.notice.web.dto;
 
-import com.sauce.notice.domain.member.Member;
 import com.sauce.notice.domain.notice.Notice;
 import lombok.Builder;
 import lombok.Getter;
