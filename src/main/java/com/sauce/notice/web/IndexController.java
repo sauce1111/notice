@@ -1,21 +1,21 @@
 package com.sauce.notice.web;
 
 import com.sauce.notice.config.auth.dto.SessionMember;
-import com.sauce.notice.domain.notice.Notice;
 import com.sauce.notice.service.MemberService;
 import com.sauce.notice.service.NoticeService;
 import com.sauce.notice.web.dto.NoticeListResponseDto;
+import com.sauce.notice.web.dto.NoticeResponceDto;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
 @Controller
@@ -45,6 +45,13 @@ public class IndexController {
         SessionMember member = (SessionMember) httpSession.getAttribute("member");
         model.addAttribute("member", member);
         return "notice-save";
+    }
+
+    @GetMapping("/notice/update/{id}")
+    public String noticeUpdate(@PathVariable Long id, Model model) {
+        NoticeResponceDto responceDto = noticeService.findById(id);
+        model.addAttribute("notice", responceDto);
+        return "notice-update";
     }
 
 }

@@ -30,7 +30,9 @@
       <tbody id="tbody">
       <tr th:each="notice: ${notice}">
         <td th:text="${notice.noticeIdx}"></td>
-        <td th:text="${notice.title}"><a th:href="@{/notice/search/(id=${notice.noticeIdx})"></a>
+        <td>
+          <a href="/notice/update" th:href="@{/notice/update/{id}(id=${notice.noticeIdx})}"
+             th:text="${notice.title}"></a>
         </td>
         <td th:text="${notice.content}"></td>
         <td th:text="${notice.modifiedDate}"></td>
