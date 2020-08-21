@@ -21,3 +21,4 @@
 
 4. 수정 및 삭제
 
+![수정삭제](https://user-images.githubusercontent.com/44424542/90862945-2e1ff780-e3c9-11ea-8685-49c2cf765276.gif)
