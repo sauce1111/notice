@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sauce.notice.domain.member.MemberRepository;
 import com.sauce.notice.domain.notice.Notice;
 import com.sauce.notice.domain.notice.NoticeRepository;
 import com.sauce.notice.web.dto.NoticeSaveReqDto;
@@ -40,6 +41,8 @@ public class NoticeApiControllerTest {
     @Autowired
     private NoticeRepository noticeRepository;
     @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
     private WebApplicationContext context;
     private MockMvc mvc;
 
@@ -62,7 +65,9 @@ public class NoticeApiControllerTest {
         //given
         String title = "test title";
         String content = "test content";
+        String memberName = "tester";
         NoticeSaveReqDto reqDto = NoticeSaveReqDto.builder()
+            .memberName(memberName)
             .title(title)
             .content(content)
             .build();
@@ -86,6 +91,7 @@ public class NoticeApiControllerTest {
         //given
         Notice savedNotice = noticeRepository.save(
             Notice.builder()
+                .memberName("tester")
                 .title("title")
                 .content("content")
                 .build());

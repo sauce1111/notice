@@ -17,27 +17,27 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
-    @Bean
-    public CommandLineRunner initData(MemberRepository memberRepository,
-        NoticeRepository noticeRepository) {
-        return args ->
-            IntStream.rangeClosed(1, 111).forEach(i -> {
-                Member member = Member.builder()
-                    .name("tester" + i)
-                    .email("test@test" + i)
-                    .role(Role.MEMBER)
-                    .build();
-
-                memberRepository.save(member);
-
-                Notice notice = Notice.builder()
-                    .memberName("tester" + i)
-                    .title("test" + i)
-                    .content("test content" + i)
-                    .build();
-
-                noticeRepository.save(notice);
-            });
-    }
+//
+//    @Bean
+//    public CommandLineRunner initData(MemberRepository memberRepository,
+//        NoticeRepository noticeRepository) {
+//        return args ->
+//            IntStream.rangeClosed(1, 111).forEach(i -> {
+//                Member member = Member.builder()
+//                    .name("tester" + i)
+//                    .email("test@test" + i)
+//                    .role(Role.MEMBER)
+//                    .build();
+//
+//                memberRepository.save(member);
+//
+//                Notice notice = Notice.builder()
+//                    .memberName("tester" + i)
+//                    .title("test" + i)
+//                    .content("test content" + i)
+//                    .build();
+//
+//                noticeRepository.save(notice);
+//            });
+//    }
 }
